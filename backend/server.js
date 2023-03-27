@@ -7,8 +7,9 @@ const MovieModel = require('./models/movies.model');
 const { MONGO_URL, PORT } = process.env;
 app.use(express.json());
 
-app.get('/api/movies', (req, res) => {
-  res.send('Server is running');
+app.get('/api/movies', async (req, res) => {
+  const movies = await MovieModel.find({});
+  return res.json(movies);
 });
 
 app.post('/api/movies', async (req, res, next) => {
