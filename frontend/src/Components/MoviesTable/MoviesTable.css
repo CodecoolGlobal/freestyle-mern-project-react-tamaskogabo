@@ -1,0 +1,13 @@
+.MoviesTable {
+  display: flex;
+  justify-content: center;
+}
+
+.Table {
+  width: 100%;
+}
+
+th, td {
+  border-bottom: 1px solid gray;
+  border-right: 1px solid gray;
+}
