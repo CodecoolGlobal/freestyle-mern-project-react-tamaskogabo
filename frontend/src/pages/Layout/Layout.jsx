@@ -1,12 +1,20 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
+import './Layout.css';
 
 export default function Layout() {
   return (
     <>
-      <div>Menu</div>
-      <Link to={'/'}>Home</Link>
-      <Link to={'/update'}>Update</Link>
+      <div className='Layout'>
+        <nav>
+          <ul>
+            <li>
+              <Link to={'/'}>Home</Link>
+            </li>
+            <li className='Logo'>Welcome to PopcornDB</li>
+          </ul>
+        </nav>
+      </div>
       <Outlet />
     </>
   );
