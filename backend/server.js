@@ -3,6 +3,13 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();
 const MovieModel = require('./models/movies.model');
+const cors = require('cors');
+
+app.use(
+  cors({
+    origin: '*',
+  }),
+);
 
 const { MONGO_URL, PORT } = process.env;
 app.use(express.json());
