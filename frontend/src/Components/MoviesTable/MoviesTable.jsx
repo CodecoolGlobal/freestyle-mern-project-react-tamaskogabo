@@ -7,6 +7,10 @@ export default function MoviesTable({ moviesArray, onDelete }) {
   const handleUpdate = (movie) => {
     navigate('/update', {state: movie});
   };
+  const handleMore = (movie) => {
+    navigate('/more', {state: movie});
+  };
+
   return (
     <div className='MoviesTable'>
       <table className='Table'>
@@ -15,6 +19,7 @@ export default function MoviesTable({ moviesArray, onDelete }) {
             <th>Title</th>
             <th>Year</th>
             <th>Genres</th>
+            <th></th>
             <th></th>
             <th></th>
           </tr>
@@ -27,6 +32,7 @@ export default function MoviesTable({ moviesArray, onDelete }) {
               <td>{movie.genres.join(', ')}</td>
               <td><button onClick={() => handleUpdate(movie)}>UPDATE</button></td>
               <td><button onClick={() => onDelete(movie._id)}>DELETE</button></td>
+              <td><button onClick={() => handleMore(movie)}>MORE</button></td>
             </tr>
           ))}
         </tbody>
