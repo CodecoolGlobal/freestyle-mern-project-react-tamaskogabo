@@ -6,6 +6,7 @@ export default function MoviesList() {
   const [loading, setLoading] = useState(true);
   const [titleQuery, setTitleQuery] = useState('');
   const [genresQuery, setGenresQuery] = useState('');
+  const [yearQuery, setYearQuery] = useState({});
 
   let displayedMovies = [];
 
@@ -16,6 +17,16 @@ export default function MoviesList() {
     displayedMovies = displayedMovies.filter((movie) =>
       movie.genres.join(', ').toLowerCase().includes(genresQuery.toLowerCase()),
     );
+    if (yearQuery.after) {
+      displayedMovies = displayedMovies.filter(
+        (movie) => Number(movie.year) >= yearQuery.after,
+      );
+    }
+    if (yearQuery.before) {
+      displayedMovies = displayedMovies.filter(
+        (movie) => Number(movie.year) <= yearQuery.before,
+      );
+    }
   }
 
   const handleDelete = async (id) => {
@@ -71,6 +82,22 @@ export default function MoviesList() {
           placeholder='Search by genre'
           value={genresQuery}
           onChange={(e) => setGenresQuery(e.target.value)}
+        ></input>
+        <input
+          type='number'
+          placeholder='Older than'
+          value={yearQuery.after ? yearQuery.after : null}
+          onChange={(e) =>
+            setYearQuery({ ...yearQuery, after: Number(e.target.value) })
+          }
+        ></input>
+        <input
+          type='number'
+          placeholder='Younger than'
+          value={yearQuery.before ? yearQuery.before : null}
+          onChange={(e) =>
+            setYearQuery({ ...yearQuery, before: Number(e.target.value) })
+          }
         ></input>
       </div>
       <MoviesTable onDelete={handleDelete} moviesArray={displayedMovies} />
