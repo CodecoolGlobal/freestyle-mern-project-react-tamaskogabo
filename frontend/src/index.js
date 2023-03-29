@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       {
         path: '/update',
         element: <UpdateMovie />,
-      },
+      }
     ],
   },
 ]);
