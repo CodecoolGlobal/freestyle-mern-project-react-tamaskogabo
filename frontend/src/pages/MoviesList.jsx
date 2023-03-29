@@ -5,6 +5,24 @@ export default function MoviesList() {
   const [movies, setMovies] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const handleDelete = async (id) => {
+    try {
+      setLoading(true);
+      await fetch(`http://localhost:8080/api/movies/${id}`, {
+        method: "DELETE"
+      });
+      const filteredMovies = movies.filter(movie => movie._id !== id);
+      setMovies(filteredMovies);
+      setLoading(false);
+    }
+    catch (error) {
+      console.error(error);
+    }
+
+    
+
+  };
+
   useEffect(() => {
     async function fetchMovies() {
       try {
@@ -30,5 +48,5 @@ export default function MoviesList() {
     return <div>Loading...</div>
   }
 
-  return <MoviesTable moviesArray={movies}/>;
+  return <MoviesTable onDelete={handleDelete} moviesArray={movies}/>;
 }
