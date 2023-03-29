@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function MovieForm() {
+export default function MovieForm({ onSubmit, setMovie }) {
   return (
     <>
-      <form className='movie-form'>
+      <form className='movie-form' onSubmit={onSubmit}>
         <div className='input-fields'>
           <label htmlFor='title'>Title:</label>
           <input name='title' id='title'></input>
