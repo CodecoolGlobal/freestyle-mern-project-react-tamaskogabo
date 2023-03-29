@@ -11,7 +11,7 @@ export default function MovieForm({ onSubmit, movie }) {
         </div>
         <div className='input-fields'>
           <label htmlFor='genres'>Genres:</label>
-          <input defaultValue={movie?.genres} name='genres' id='genres'></input>
+          <input defaultValue={movie?.genres.join(', ')} name='genres' id='genres'></input>
         </div>
         <div className='input-fields'>
           <label htmlFor='year'>Year:</label>
@@ -27,11 +27,11 @@ export default function MovieForm({ onSubmit, movie }) {
         </div>
         <div className='input-fields'>
           <label htmlFor='writers'>Writers:</label>
-          <input defaultValue={movie?.writers} name='writers' id='writers'></input>
+          <input defaultValue={movie?.writers.join(', ')} name='writers' id='writers'></input>
         </div>
         <div className='input-fields'>
           <label htmlFor='actors'>Actors:</label>
-          <input defaultValue={movie?.actors} name='actors' id='actors'></input>
+          <input defaultValue={movie?.actors.join(', ')} name='actors' id='actors'></input>
         </div>
         <div className='input-fields'>
           <label htmlFor='storyline'>Storyline:</label>
@@ -39,7 +39,7 @@ export default function MovieForm({ onSubmit, movie }) {
         </div>
         <div className='input-fields'>
           <label htmlFor='directors'>Directors:</label>
-          <input defaultValue={movie?.directors} name='directors' id='directors'></input>
+          <input defaultValue={movie?.directors.join(', ')} name='directors' id='directors'></input>
         </div>
         <div className='buttons'>
           <button type='submit'>Save</button>
