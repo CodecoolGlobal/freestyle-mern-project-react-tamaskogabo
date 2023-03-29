@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.get("/api/movies", async (req, res) => {
   try {
-    const movies = await MovieModel.find({});
+    const movies = await MovieModel.find({}).sort({title : 'asc'});
     return res.json(movies);
   }
   catch (error) {
