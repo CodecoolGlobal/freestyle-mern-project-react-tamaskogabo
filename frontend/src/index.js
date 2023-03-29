@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import Layout from './pages/Layout/Layout';
 import MoviesList from './pages/MoviesList';
 import UpdateMovie from './pages/UpdateMovie';
+import CreateMovie from './pages/CreateMovie';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
       {
         path: '/update',
         element: <UpdateMovie />,
-      }
+      },
+      {
+        path: '/create',
+        element: <CreateMovie />,
+      },
     ],
   },
 ]);

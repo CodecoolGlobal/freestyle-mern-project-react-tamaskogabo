@@ -11,6 +11,9 @@ export default function Layout() {
             <li>
               <Link to={'/'}>Home</Link>
             </li>
+            <li>
+              <Link to={'/create'}>Create Movie</Link>
+            </li>
             <li className='Logo'>Welcome to PopcornDB</li>
           </ul>
         </nav>
