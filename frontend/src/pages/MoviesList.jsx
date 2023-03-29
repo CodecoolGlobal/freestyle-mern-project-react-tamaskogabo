@@ -1,26 +1,31 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import MoviesTable from '../Components/MoviesTable/MoviesTable';
 
 export default function MoviesList() {
   const [movies, setMovies] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [titleQuery, setTitleQuery] = useState('');
+
+  let displayedMovies = [];
+
+  if (movies) {
+    displayedMovies = movies.filter((movie) =>
+      movie.title.toLowerCase().includes(titleQuery.toLowerCase()),
+    );
+  }
 
   const handleDelete = async (id) => {
     try {
       setLoading(true);
       await fetch(`http://localhost:8080/api/movies/${id}`, {
-        method: "DELETE"
+        method: 'DELETE',
       });
-      const filteredMovies = movies.filter(movie => movie._id !== id);
+      const filteredMovies = movies.filter((movie) => movie._id !== id);
       setMovies(filteredMovies);
       setLoading(false);
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error);
     }
-
-    
-
   };
 
   useEffect(() => {
@@ -45,8 +50,20 @@ export default function MoviesList() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
-  return <MoviesTable onDelete={handleDelete} moviesArray={movies}/>;
+  return (
+    <>
+      <div className='search-inputs'>
+        <input
+          type='search'
+          placeholder='Search by title'
+          value={titleQuery}
+          onChange={(e) => setTitleQuery(e.target.value)}
+        ></input>
+      </div>
+      <MoviesTable onDelete={handleDelete} moviesArray={displayedMovies} />
+    </>
+  );
 }
