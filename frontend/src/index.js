@@ -8,6 +8,7 @@ import Layout from './pages/Layout/Layout';
 import MoviesList from './pages/MoviesList';
 import UpdateMovie from './pages/UpdateMovie';
 import CreateMovie from './pages/CreateMovie';
+import MoreData from './pages/MoreData';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         path: '/create',
         element: <CreateMovie />,
       },
+      {
+        path: '/more',
+        element: <MoreData />,
+      }
     ],
   },
 ]);
