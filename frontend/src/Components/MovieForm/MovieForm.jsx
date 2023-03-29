@@ -1,45 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function MovieForm({ onSubmit }) {
+export default function MovieForm({ onSubmit, movie }) {
   return (
     <>
-      <form className='movie-form' onSubmit={onSubmit}>
+      <form className='movie-form' onSubmit={(event) => onSubmit(event)}>
         <div className='input-fields'>
           <label htmlFor='title'>Title:</label>
-          <input name='title' id='title'></input>
+          <input defaultValue={movie?.title} name='title' id='title'></input>
         </div>
         <div className='input-fields'>
           <label htmlFor='genres'>Genres:</label>
-          <input name='genres' id='genres'></input>
+          <input defaultValue={movie?.genres.join(', ')} name='genres' id='genres'></input>
         </div>
         <div className='input-fields'>
           <label htmlFor='year'>Year:</label>
-          <input name='year' id='year'></input>
+          <input defaultValue={movie?.year} name='year' id='year'></input>
         </div>
         <div className='input-fields'>
           <label htmlFor='runtime'>Runtime:</label>
-          <input name='runtime' id='runtime'></input>
+          <input defaultValue={movie?.runtime} name='runtime' id='runtime'></input>
         </div>
         <div className='input-fields'>
           <label htmlFor='release_date'>Release date:</label>
-          <input name='release_date' id='release_date'></input>
+          <input defaultValue={movie?.release_date} name='release_date' id='release_date'></input>
         </div>
         <div className='input-fields'>
           <label htmlFor='writers'>Writers:</label>
-          <input name='writers' id='writers'></input>
+          <input defaultValue={movie?.writers.join(', ')} name='writers' id='writers'></input>
         </div>
         <div className='input-fields'>
           <label htmlFor='actors'>Actors:</label>
-          <input name='actors' id='actors'></input>
+          <input defaultValue={movie?.actors.join(', ')} name='actors' id='actors'></input>
         </div>
         <div className='input-fields'>
           <label htmlFor='storyline'>Storyline:</label>
-          <input name='storyline' id='storyline'></input>
+          <input defaultValue={movie?.storyline} name='storyline' id='storyline'></input>
         </div>
         <div className='input-fields'>
           <label htmlFor='directors'>Directors:</label>
-          <input name='directors' id='directors'></input>
+          <input defaultValue={movie?.directors.join(', ')} name='directors' id='directors'></input>
         </div>
         <div className='buttons'>
           <button type='submit'>Save</button>
