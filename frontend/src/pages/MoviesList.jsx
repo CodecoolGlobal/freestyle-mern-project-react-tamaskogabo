@@ -17,12 +17,12 @@ export default function MoviesList() {
     displayedMovies = displayedMovies.filter((movie) =>
       movie.genres.join(', ').toLowerCase().includes(genresQuery.toLowerCase()),
     );
-    if (yearQuery.after) {
+    if (yearQuery.after && yearQuery.after >= 1900) {
       displayedMovies = displayedMovies.filter(
         (movie) => Number(movie.year) >= yearQuery.after,
       );
     }
-    if (yearQuery.before) {
+    if (yearQuery.before && yearQuery.before <= 2200 && yearQuery.before >= 1900) {
       displayedMovies = displayedMovies.filter(
         (movie) => Number(movie.year) <= yearQuery.before,
       );
@@ -86,7 +86,7 @@ export default function MoviesList() {
         <input
           type='number'
           placeholder='Older than'
-          value={yearQuery.after ? yearQuery.after : null}
+          value={yearQuery.after ? yearQuery.after : ''}
           onChange={(e) =>
             setYearQuery({ ...yearQuery, after: Number(e.target.value) })
           }
@@ -94,7 +94,7 @@ export default function MoviesList() {
         <input
           type='number'
           placeholder='Younger than'
-          value={yearQuery.before ? yearQuery.before : null}
+          value={yearQuery.before ? yearQuery.before : ''}
           onChange={(e) =>
             setYearQuery({ ...yearQuery, before: Number(e.target.value) })
           }
