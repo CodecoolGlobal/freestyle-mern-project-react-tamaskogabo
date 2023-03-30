@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import MoviesTable from '../Components/MoviesTable/MoviesTable';
+import Loading from '../Components/Loading/Loading';
 
 function findYoungestAndOldest(movies) {
   return movies.reduce(
@@ -89,7 +90,7 @@ export default function MoviesList() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
