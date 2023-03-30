@@ -15,14 +15,6 @@ export default function MoviesTable({ moviesArray, onDelete }) {
     <div className='MoviesTable'>
       <table className='Table'>
         <thead>
-          <tr>
-            <th>Title</th>
-            <th>Year</th>
-            <th>Genres</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
         </thead>
         <tbody>
           {moviesArray.map((movie) => (

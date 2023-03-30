@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import MovieForm from '../Components/MovieForm/MovieForm';
 
 export default function UpdateMovie() {
-  const { state } = useLocation();
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   function splitMultipleInputs(keys, movieToSend) {
     for (const key of keys) {
