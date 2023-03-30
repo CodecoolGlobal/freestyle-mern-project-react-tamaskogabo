@@ -1,26 +1,70 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import MoviesTable from '../Components/MoviesTable/MoviesTable';
+
+function findYoungestAndOldest(movies) {
+  return movies.reduce(
+    (acc, movie) => {
+      if (movie.year < acc.oldest) {
+        acc.oldest = movie.year;
+      } else if (movie.year > acc.youngest) {
+        acc.youngest = movie.year;
+      }
+      return acc;
+    },
+    { oldest: movies[0].year, youngest: movies[0].year },
+  );
+}
 
 export default function MoviesList() {
   const [movies, setMovies] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [titleQuery, setTitleQuery] = useState('');
+  const [genresQuery, setGenresQuery] = useState('');
+  const [yearQuery, setYearQuery] = useState({});
+
+  let displayedMovies = [];
+
+  if (movies) {
+    const youngestAndOldestMovie = findYoungestAndOldest(movies);
+
+    displayedMovies = movies.filter((movie) =>
+      movie.title.toLowerCase().includes(titleQuery.toLowerCase()),
+    );
+    displayedMovies = displayedMovies.filter((movie) =>
+      movie.genres.join(', ').toLowerCase().includes(genresQuery.toLowerCase()),
+    );
+    if (
+      yearQuery.after &&
+      yearQuery.after >= youngestAndOldestMovie.oldest &&
+      yearQuery.after <= youngestAndOldestMovie.youngest
+    ) {
+      displayedMovies = displayedMovies.filter(
+        (movie) => Number(movie.year) >= yearQuery.after,
+      );
+    }
+    if (
+      yearQuery.before &&
+      yearQuery.before <= youngestAndOldestMovie.youngest &&
+      yearQuery.before >= youngestAndOldestMovie.oldest
+    ) {
+      displayedMovies = displayedMovies.filter(
+        (movie) => Number(movie.year) <= yearQuery.before,
+      );
+    }
+  }
 
   const handleDelete = async (id) => {
     try {
       setLoading(true);
       await fetch(`http://localhost:8080/api/movies/${id}`, {
-        method: "DELETE"
+        method: 'DELETE',
       });
-      const filteredMovies = movies.filter(movie => movie._id !== id);
+      const filteredMovies = movies.filter((movie) => movie._id !== id);
       setMovies(filteredMovies);
       setLoading(false);
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error);
     }
-
-    
-
   };
 
   useEffect(() => {
@@ -45,8 +89,42 @@ export default function MoviesList() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
-  return <MoviesTable onDelete={handleDelete} moviesArray={movies}/>;
+  return (
+    <>
+      <div className='search-inputs'>
+        <input
+          type='search'
+          placeholder='Search by title'
+          value={titleQuery}
+          onChange={(e) => setTitleQuery(e.target.value)}
+        ></input>
+        <input
+          type='search'
+          placeholder='Search by genre'
+          value={genresQuery}
+          onChange={(e) => setGenresQuery(e.target.value)}
+        ></input>
+        <input
+          type='number'
+          placeholder='From year...'
+          value={yearQuery.after ? yearQuery.after : ''}
+          onChange={(e) =>
+            setYearQuery({ ...yearQuery, after: Number(e.target.value) })
+          }
+        ></input>
+        <input
+          type='number'
+          placeholder='Until year...'
+          value={yearQuery.before ? yearQuery.before : ''}
+          onChange={(e) =>
+            setYearQuery({ ...yearQuery, before: Number(e.target.value) })
+          }
+        ></input>
+      </div>
+      <MoviesTable onDelete={handleDelete} moviesArray={displayedMovies} />
+    </>
+  );
 }

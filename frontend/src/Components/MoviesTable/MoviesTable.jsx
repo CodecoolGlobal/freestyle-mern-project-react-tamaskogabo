@@ -1,7 +1,6 @@
 import React from 'react';
 import './MoviesTable.css';
-import { Link, useNavigate } from 'react-router-dom';
-import UpdateMovie from '../../pages/UpdateMovie';
+import { useNavigate } from 'react-router-dom';
 
 export default function MoviesTable({ moviesArray, onDelete }) {
   const navigate = useNavigate();
