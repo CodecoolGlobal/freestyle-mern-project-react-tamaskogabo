@@ -1,6 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import MoviesTable from '../Components/MoviesTable/MoviesTable';
 
+function findYoungestAndOldest(movies) {
+  return movies.reduce(
+    (acc, movie) => {
+      if (movie.year < acc.oldest) {
+        acc.oldest = movie.year;
+      } else if (movie.year > acc.youngest) {
+        acc.youngest = movie.year;
+      }
+      return acc;
+    },
+    { oldest: movies[0].year, youngest: movies[0].year },
+  );
+}
+
 export default function MoviesList() {
   const [movies, setMovies] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -11,18 +25,28 @@ export default function MoviesList() {
   let displayedMovies = [];
 
   if (movies) {
+    const youngestAndOldestMovie = findYoungestAndOldest(movies);
+
     displayedMovies = movies.filter((movie) =>
       movie.title.toLowerCase().includes(titleQuery.toLowerCase()),
     );
     displayedMovies = displayedMovies.filter((movie) =>
       movie.genres.join(', ').toLowerCase().includes(genresQuery.toLowerCase()),
     );
-    if (yearQuery.after && yearQuery.after >= 1900) {
+    if (
+      yearQuery.after &&
+      yearQuery.after >= youngestAndOldestMovie.oldest &&
+      yearQuery.after <= youngestAndOldestMovie.youngest
+    ) {
       displayedMovies = displayedMovies.filter(
         (movie) => Number(movie.year) >= yearQuery.after,
       );
     }
-    if (yearQuery.before && yearQuery.before <= 2200 && yearQuery.before >= 1900) {
+    if (
+      yearQuery.before &&
+      yearQuery.before <= youngestAndOldestMovie.youngest &&
+      yearQuery.before >= youngestAndOldestMovie.oldest
+    ) {
       displayedMovies = displayedMovies.filter(
         (movie) => Number(movie.year) <= yearQuery.before,
       );
@@ -85,7 +109,7 @@ export default function MoviesList() {
         ></input>
         <input
           type='number'
-          placeholder='Older than'
+          placeholder='From year...'
           value={yearQuery.after ? yearQuery.after : ''}
           onChange={(e) =>
             setYearQuery({ ...yearQuery, after: Number(e.target.value) })
@@ -93,7 +117,7 @@ export default function MoviesList() {
         ></input>
         <input
           type='number'
-          placeholder='Younger than'
+          placeholder='Until year...'
           value={yearQuery.before ? yearQuery.before : ''}
           onChange={(e) =>
             setYearQuery({ ...yearQuery, before: Number(e.target.value) })
