@@ -12,6 +12,11 @@
   justify-content: space-evenly;
 }
 
+.Layout {
+  position:fixed;
+  width: 100%;
+}
+
 .layout-links {
   transition-duration: 500ms;
   border-radius: 5%;
