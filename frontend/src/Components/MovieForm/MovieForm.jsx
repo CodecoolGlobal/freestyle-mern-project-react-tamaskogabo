@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './MovieForm.css';
 
 export default function MovieForm({ onSubmit, movie }) {
   return (
