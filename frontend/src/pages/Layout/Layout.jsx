@@ -9,12 +9,16 @@ export default function Layout() {
         <nav>
           <ul>
             <li>
-              <Link to={'/'}>Home</Link>
+              <Link to={'/'} className='layout-links'>
+                Home
+              </Link>
             </li>
             <li>
-              <Link to={'/create'}>Create Movie</Link>
+              <Link to={'/create'} className='layout-links'>
+                Create Movie
+              </Link>
             </li>
-            <li className='Logo'>Welcome to PopcornDB</li>
+            <li className='Welcome'>PopcornDB 👽</li>
           </ul>
         </nav>
       </div>
