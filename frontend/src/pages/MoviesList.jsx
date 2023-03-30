@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MoviesTable from '../Components/MoviesTable/MoviesTable';
 import Loading from '../Components/Loading/Loading';
+import './MoviesList.css';
 
 function findYoungestAndOldest(movies) {
   return movies.reduce(
@@ -97,18 +98,21 @@ export default function MoviesList() {
     <>
       <div className='search-inputs'>
         <input
+          className='movie-filters'
           type='search'
           placeholder='Search by title'
           value={titleQuery}
           onChange={(e) => setTitleQuery(e.target.value)}
         ></input>
         <input
+          className='movie-filters'
           type='search'
           placeholder='Search by genre'
           value={genresQuery}
           onChange={(e) => setGenresQuery(e.target.value)}
         ></input>
         <input
+          className='movie-filters'
           type='number'
           placeholder='From year...'
           value={yearQuery.after ? yearQuery.after : ''}
@@ -117,6 +121,7 @@ export default function MoviesList() {
           }
         ></input>
         <input
+          className='movie-filters'
           type='number'
           placeholder='Until year...'
           value={yearQuery.before ? yearQuery.before : ''}
