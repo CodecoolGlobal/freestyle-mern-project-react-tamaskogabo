@@ -1,11 +1,12 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import MovieForm from '../Components/MovieForm/MovieForm';
 import { useNavigate } from 'react-router-dom';
 
 export default function UpdateMovie() {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const navigate = useNavigate();
 
   function splitMultipleInputs(keys, movieToSend) {
     for (const key of keys) {
