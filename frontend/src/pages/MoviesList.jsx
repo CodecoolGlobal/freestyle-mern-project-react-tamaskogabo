@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, } from 'react';
 import MoviesTable from '../Components/MoviesTable/MoviesTable';
 import Loading from '../Components/Loading/Loading';
 import './MoviesList.css';
+import Fade from 'react-reveal/Fade';
 
 function findYoungestAndOldest(movies) {
   return movies.reduce(
@@ -96,40 +97,42 @@ export default function MoviesList() {
 
   return (
     <>
-      <div className='search-inputs'>
-        <input
-          className='movie-filters'
-          type='search'
-          placeholder='Search by title'
-          value={titleQuery}
-          onChange={(e) => setTitleQuery(e.target.value)}
-        ></input>
-        <input
-          className='movie-filters'
-          type='search'
-          placeholder='Search by genre'
-          value={genresQuery}
-          onChange={(e) => setGenresQuery(e.target.value)}
-        ></input>
-        <input
-          className='movie-filters'
-          type='number'
-          placeholder='From year...'
-          value={yearQuery.after ? yearQuery.after : ''}
-          onChange={(e) =>
-            setYearQuery({ ...yearQuery, after: Number(e.target.value) })
-          }
-        ></input>
-        <input
-          className='movie-filters'
-          type='number'
-          placeholder='Until year...'
-          value={yearQuery.before ? yearQuery.before : ''}
-          onChange={(e) =>
-            setYearQuery({ ...yearQuery, before: Number(e.target.value) })
-          }
-        ></input>
-      </div>
+      <Fade top>
+        <div className='search-inputs'>
+          <input
+            className='movie-filters'
+            type='search'
+            placeholder='Search by title'
+            value={titleQuery}
+            onChange={(e) => setTitleQuery(e.target.value)}
+          ></input>
+          <input
+            className='movie-filters'
+            type='search'
+            placeholder='Search by genre'
+            value={genresQuery}
+            onChange={(e) => setGenresQuery(e.target.value)}
+          ></input>
+          <input
+            className='movie-filters'
+            type='number'
+            placeholder='From year...'
+            value={yearQuery.after ? yearQuery.after : ''}
+            onChange={(e) =>
+              setYearQuery({ ...yearQuery, after: Number(e.target.value) })
+            }
+          ></input>
+          <input
+            className='movie-filters'
+            type='number'
+            placeholder='Until year...'
+            value={yearQuery.before ? yearQuery.before : ''}
+            onChange={(e) =>
+              setYearQuery({ ...yearQuery, before: Number(e.target.value) })
+            }
+          ></input>
+        </div>
+      </Fade>
       <MoviesTable onDelete={handleDelete} moviesArray={displayedMovies} />
     </>
   );
