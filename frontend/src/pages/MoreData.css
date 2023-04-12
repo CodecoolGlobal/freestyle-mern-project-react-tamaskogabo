@@ -12,7 +12,7 @@
   box-sizing: border-box;
   color: #41403e;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
   font-family: Neucha, sans-serif;
