@@ -1,14 +1,12 @@
 import React from 'react';
 import './MoviesTable.css';
 import { useNavigate } from 'react-router-dom';
+import Row from '../Row/Row';
 
 export default function MoviesTable({ moviesArray, onDelete }) {
   const navigate = useNavigate();
   const handleUpdate = (movie) => {
-    navigate('/update', {state: movie});
-  };
-  const handleMore = (movie) => {
-    navigate('/more', {state: movie});
+    navigate('/update', { state: movie });
   };
 
   return (
@@ -18,14 +16,7 @@ export default function MoviesTable({ moviesArray, onDelete }) {
         </thead>
         <tbody>
           {moviesArray.map((movie) => (
-            <tr key={movie._id}>
-              <td>{movie.title}</td>
-              <td>{movie.year}</td>
-              <td>{movie.genres.join(', ')}</td>
-              <td><button onClick={() => handleUpdate(movie)}>UPDATE</button></td>
-              <td><button onClick={() => onDelete(movie._id)}>DELETE</button></td>
-              <td><button onClick={() => handleMore(movie)}>MORE</button></td>
-            </tr>
+            <Row onDelete={onDelete} movie={movie} handleUpdate={handleUpdate} />
           ))}
         </tbody>
       </table>
