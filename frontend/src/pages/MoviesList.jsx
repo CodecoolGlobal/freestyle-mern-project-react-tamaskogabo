@@ -90,7 +90,7 @@ export default function MoviesList() {
     return () => {
       ignore = true;
     };
-  }, [titleOrder]);
+  }, []);
 
   if (loading) {
     return <Loading />;
@@ -110,6 +110,7 @@ export default function MoviesList() {
       return b.title.localeCompare(a.title);
     }
   });
+  console.log(displayedMovies)
 
   return (
     <>
