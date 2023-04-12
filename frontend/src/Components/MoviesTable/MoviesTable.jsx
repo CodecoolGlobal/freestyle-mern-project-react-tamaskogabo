@@ -1,6 +1,7 @@
 import React from 'react';
 import './MoviesTable.css';
 import { useNavigate } from 'react-router-dom';
+import Fade from 'react-reveal/Fade';
 
 export default function MoviesTable({ moviesArray, onDelete }) {
   const navigate = useNavigate();
@@ -18,7 +19,8 @@ export default function MoviesTable({ moviesArray, onDelete }) {
         </thead>
         <tbody>
           {moviesArray.map((movie) => (
-            <tr key={movie._id}>
+            <Fade bottom key={movie._id}>
+            <tr>
               <td>{movie.title}</td>
               <td>{movie.year}</td>
               <td>{movie.genres.join(', ')}</td>
@@ -26,6 +28,7 @@ export default function MoviesTable({ moviesArray, onDelete }) {
               <td><button onClick={() => onDelete(movie._id)}>DELETE</button></td>
               <td><button onClick={() => handleMore(movie)}>MORE</button></td>
             </tr>
+            </Fade>
           ))}
         </tbody>
       </table>
