@@ -110,7 +110,6 @@ export default function MoviesList() {
       return b.title.localeCompare(a.title);
     }
   });
-  console.log(displayedMovies)
 
   return (
     <>
