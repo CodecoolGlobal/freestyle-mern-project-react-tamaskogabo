@@ -16,7 +16,7 @@ export default function MoviesTable({ moviesArray, onDelete }) {
         </thead>
         <tbody>
           {moviesArray.map((movie) => (
-            <Row onDelete={onDelete} movie={movie} handleUpdate={handleUpdate} />
+            <Row  onDelete={onDelete} movie={movie} handleUpdate={handleUpdate} />
           ))}
         </tbody>
       </table>
