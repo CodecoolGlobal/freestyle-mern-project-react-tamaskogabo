@@ -1,9 +1,10 @@
 .movie-form {
-  background-color: #fff;
+  background-color: #ffffffde;
   background-image: none;
   background-position: 0 90%;
   background-repeat: repeat no-repeat;
   background-size: 4px 3px;
+  width: 55rem;
   border-style: solid;
   border-width: 2px;
   box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
@@ -27,6 +28,11 @@
   font-size: 1.5rem;
   font-weight: bold;
   padding-top: 10vh;
+}
+
+.form-element {
+  display: flex;
+  justify-content: center;
 }
 
 .form-inputs {
@@ -63,4 +69,9 @@
 
 .from-element {
   overflow: hidden;
+}
+
+#form-buttons-div {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }

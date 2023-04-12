@@ -102,7 +102,7 @@ export default function MovieForm({ onSubmit, movie }) {
                   id='directors'
                 ></input>
               </div>
-              <div className='buttons'>
+              <div id='form-buttons-div' className='buttons'>
                 <button type='submit'>Save</button>
                 <Link to='/'>
                   <button type='button'>Cancel</button>
