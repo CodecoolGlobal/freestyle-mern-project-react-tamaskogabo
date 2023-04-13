@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { createBrowserRouter, RouterProvider, } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 import Layout from './pages/Layout/Layout';
@@ -9,7 +9,6 @@ import MoviesList from './pages/MoviesList';
 import UpdateMovie from './pages/UpdateMovie';
 import CreateMovie from './pages/CreateMovie';
 import MoreData from './pages/MoreData';
-import Login from './pages/Login';
 
 const router = createBrowserRouter([
   {
@@ -19,10 +18,6 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <MoviesList />,
-      },
-      {
-        path: '/login',
-        element: <Login />,
       },
       {
         path: '/update',
@@ -35,7 +30,7 @@ const router = createBrowserRouter([
       {
         path: '/more',
         element: <MoreData />,
-      }
+      },
     ],
   },
 ]);
