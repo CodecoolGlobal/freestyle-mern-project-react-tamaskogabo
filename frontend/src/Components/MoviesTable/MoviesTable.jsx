@@ -17,9 +17,7 @@ export default function MoviesTable({ moviesArray, onDelete }) {
         </thead>
         <tbody>
           {moviesArray.map((movie) => (
-            <Link style={{ textDecoration: 'none' }} to={`/comment/${movie._id}` }>
               <Row key={movie._id} onDelete={onDelete} movie={movie} handleUpdate={handleUpdate} />
-            </Link>
           ))}
         </tbody>
       </table>

@@ -3,5 +3,39 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 10vh;
+    padding-top: 5vh;
+}
+
+#comment-section > div {
+    display: grid;
+    width: 66%;
+    grid-template-columns: 1fr 2fr;
+    column-gap: -100px;
+    margin-bottom: 5vh;
+
+}
+
+#comment-section > table > tr {
+    margin-bottom: 1vh;
+
+}
+
+#comment-section > table {
+    border-spacing: 0px;
+
+}
+
+#comment-section > div > input {
+    width: 100%;
+    padding-block: 5vh;
+
+}
+
+.comment-table {
+    width: 66%;
+}
+
+.comment-table > tr {
+    grid-template-columns: 2fr 5fr 1fr;
+    width: 100%;
 }

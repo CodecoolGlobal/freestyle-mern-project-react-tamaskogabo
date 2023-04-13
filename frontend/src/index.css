@@ -5,6 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('https://www.bestcoloringpagesforkids.com/wp-content/uploads/2018/03/Marvel-Coloring-Pages.jpg');
+  /* background-attachment: fixed; */
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 code {

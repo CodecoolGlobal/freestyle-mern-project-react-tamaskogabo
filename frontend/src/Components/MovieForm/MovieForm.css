@@ -1,12 +1,13 @@
 .movie-form {
-  background-color: #fff;
+  background-color: #ffffffde;
   background-image: none;
   background-position: 0 90%;
   background-repeat: repeat no-repeat;
   background-size: 4px 3px;
+  width: 55rem;
   border-style: solid;
   border-width: 2px;
-  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
   box-sizing: border-box;
   color: #41403e;
   display: flex;
@@ -29,6 +30,11 @@
   padding-top: 10vh;
 }
 
+.form-element {
+  display: flex;
+  justify-content: center;
+}
+
 .form-inputs {
   background-color: #fff;
   background-image: none;
@@ -37,7 +43,7 @@
   background-size: 4px 3px;
   border-style: solid;
   border-width: 2px;
-  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
   box-sizing: border-box;
   color: #41403e;
   display: flex;
@@ -59,4 +65,13 @@
 
 .input-fields {
   display: flex;
+}
+
+.from-element {
+  overflow: hidden;
+}
+
+#form-buttons-div {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
