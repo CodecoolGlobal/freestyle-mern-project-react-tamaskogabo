@@ -1,10 +1,14 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-require('dotenv').config();
+const bcrypt = require('bcryptjs');
 const MovieModel = require('./models/movies.model');
+const UserModel = require('./models/user.model');
 const cors = require('cors');
 const CommentModel = require('./models/comments.model')
+
+require('dotenv').config();
+const { MONGO_URL, PORT } = process.env;
 
 app.use(
   cors({
@@ -12,27 +16,63 @@ app.use(
   }),
 );
 
-const { MONGO_URL, PORT } = process.env;
 app.use(express.json());
 
-app.get("/api/movies", async (req, res) => {
-  try {
-    const movies = await MovieModel.find({}).sort({title : 'asc'});
-    return res.json(movies);
+app.post('/login', async (req, res) => {
+  const exists = await UserModel.find({username: req.body.username});
+  if (exists.length === 0) {
+    res.status(404);
+    return res.json();
   }
-  catch (error) {
+  bcrypt.compare(req.body.password, exists[0].password, (err, response) => {
+    if (response === true) {
+      res.status(200);
+      return res.json({'approved': 'true'});
+    }
+    res.status(401);
+    return res.json({'approved': 'false'});
+  })
+});
+
+app.post('/register', async (req, res) => {
+  const exists = await UserModel.find({username: req.body.username});
+  if (exists.length > 0) {
+    res.status(400);
+    return res.json();
+  }
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const saved = await UserModel.create({
+      username: req.body.username,
+      password: hashedPassword,
+    });
+    res.status(201);
+    res.json(saved);
+  } catch (err) {
+    return next(err);
+  }
+});
+
+app.get('/user', (req, res) => {
+  console.log(req.body);
+});
+
+app.get('/api/movies', async (req, res) => {
+  try {
+    const movies = await MovieModel.find({}).sort({ title: 'asc' });
+    return res.json(movies);
+  } catch (error) {
     res.send(error);
   }
 });
 
-app.post("/api/movies", async (req, res, next) => {
+app.post('/api/movies', async (req, res, next) => {
   const movie = req.body;
   try {
     const saved = await MovieModel.create(movie);
     res.status(201);
     res.json(saved);
-  } 
-  catch (err) {
+  } catch (err) {
     return next(err);
   }
 });
@@ -41,11 +81,13 @@ app.patch('/api/movies/:id', async (req, res, next) => {
   try {
     const idOfDocumentToUpdate = req.params.id;
     const updateFromBody = req.body;
-    const saved = await MovieModel.findByIdAndUpdate(idOfDocumentToUpdate, updateFromBody);
+    const saved = await MovieModel.findByIdAndUpdate(
+      idOfDocumentToUpdate,
+      updateFromBody,
+    );
 
     res.json(saved);
-  }
-  catch (error) {
+  } catch (error) {
     return next(error);
   }
 });
@@ -55,8 +97,7 @@ app.delete('/api/movies/:id', async (req, res) => {
     const movieIdFromClient = req.params.id;
     const deleteData = await MovieModel.findByIdAndDelete(movieIdFromClient);
     res.send(deleteData);
-  }
-  catch (error) {
+  } catch (error) {
     res.send(error);
   }
 });
