@@ -29,7 +29,7 @@ export default function Layout() {
           </nav>
         </div>
       </Fade>
-      <Outlet context={[setLoggedIn]} />
+      <Outlet context={[loggedIn, setLoggedIn]} />
     </>
   );
 }

@@ -3,7 +3,7 @@ import './Login.css';
 import { useOutletContext } from 'react-router-dom';
 
 export default function Register({ onLogin }) {
-  const [setLoggedIn] = useOutletContext();
+  const [loggedIn, setLoggedIn] = useOutletContext();
 
   useEffect(() => {
     setLoggedIn(false);
