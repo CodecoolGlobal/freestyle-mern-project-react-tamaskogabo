@@ -9,6 +9,7 @@ import MoviesList from './pages/MoviesList';
 import UpdateMovie from './pages/UpdateMovie';
 import CreateMovie from './pages/CreateMovie';
 import MoreData from './pages/MoreData';
+import Login from './pages/Login';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <MoviesList />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
       {
         path: '/update',
