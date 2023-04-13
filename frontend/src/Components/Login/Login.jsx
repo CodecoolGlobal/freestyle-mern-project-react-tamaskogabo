@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Login.css';
+import { useOutletContext } from 'react-router-dom';
 
 export default function Register({ onLogin }) {
+  const [setLoggedIn] = useOutletContext();
+
+  useEffect(() => {
+    setLoggedIn(false);
+  }, [setLoggedIn]);
+
   async function registerUser(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -15,6 +22,7 @@ export default function Register({ onLogin }) {
       if (request.status === 400) {
         window.alert('Username already taken.');
       } else {
+        setLoggedIn(true);
         onLogin(true);
       }
     } catch (error) {
@@ -38,6 +46,7 @@ export default function Register({ onLogin }) {
       if (response.approved === 'false') {
         window.alert('Wrong username or password');
       } else {
+        setLoggedIn(true);
         onLogin(true);
       }
     } catch (error) {
