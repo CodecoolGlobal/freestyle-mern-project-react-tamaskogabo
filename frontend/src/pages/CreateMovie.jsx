@@ -14,7 +14,7 @@ function splitMultipleInputs(keys, movieToSend) {
 export default function CreateMovie() {
   const navigate = useNavigate();
 
-  const [loggedIn, setLoggedIn] = useOutletContext();
+  const [loggedIn] = useOutletContext();
 
   async function handleSubmit(e) {
     e.preventDefault();

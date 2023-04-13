@@ -42,7 +42,6 @@ export default function Register({ onLogin }) {
         body: JSON.stringify(userToSend),
       });
       const response = await request.json();
-      console.log(response);
       if (response.approved === 'false') {
         window.alert('Wrong username or password');
       } else {

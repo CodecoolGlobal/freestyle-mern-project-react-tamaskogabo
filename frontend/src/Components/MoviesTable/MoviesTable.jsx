@@ -2,7 +2,6 @@ import React from 'react';
 import './MoviesTable.css';
 import { useNavigate } from 'react-router-dom';
 import Row from '../Row/Row';
-import { Link } from 'react-router-dom';
 
 export default function MoviesTable({ moviesArray, onDelete }) {
   const navigate = useNavigate();
@@ -13,11 +12,15 @@ export default function MoviesTable({ moviesArray, onDelete }) {
   return (
     <div className='MoviesTable'>
       <table className='Table'>
-        <thead>
-        </thead>
+        <thead></thead>
         <tbody>
           {moviesArray.map((movie) => (
-              <Row key={movie._id} onDelete={onDelete} movie={movie} handleUpdate={handleUpdate} />
+            <Row
+              key={movie._id}
+              onDelete={onDelete}
+              movie={movie}
+              handleUpdate={handleUpdate}
+            />
           ))}
         </tbody>
       </table>
