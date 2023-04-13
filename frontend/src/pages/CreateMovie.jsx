@@ -1,6 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import MovieForm from '../Components/MovieForm/MovieForm';
+import Login from '../Components/Login/Login';
 
 function splitMultipleInputs(keys, movieToSend) {
   for (const key of keys) {
@@ -13,11 +14,16 @@ function splitMultipleInputs(keys, movieToSend) {
 export default function CreateMovie() {
   const navigate = useNavigate();
 
+  const [loggedIn, setLoggedIn] = useOutletContext();
+
   async function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const movieToSend = Object.fromEntries(formData);
-    splitMultipleInputs(['actors', 'directors', 'writers', 'genres'], movieToSend);
+    splitMultipleInputs(
+      ['actors', 'directors', 'writers', 'genres'],
+      movieToSend,
+    );
 
     try {
       await fetch('http://localhost:8080/api/movies/', {
@@ -31,6 +37,10 @@ export default function CreateMovie() {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  if (loggedIn === false) {
+    return <Login />;
   }
 
   return (

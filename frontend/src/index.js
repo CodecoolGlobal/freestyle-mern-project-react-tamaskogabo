@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { createBrowserRouter, RouterProvider, } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 import Layout from './pages/Layout/Layout';
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
       {
         path: '/more',
         element: <MoreData />,
-      }
+      },
     ],
   },
 ]);

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import './Layout.css';
 import Fade from 'react-reveal/Fade';
 
+
 export default function Layout() {
+  const [loggedIn, setLoggedIn] = useState(false);
   return (
     <>
       <Fade top>
@@ -15,17 +17,19 @@ export default function Layout() {
                   Home
                 </Link>
               </li>
-              <li>
-                <Link to={'/create'} className='layout-links'>
-                  Create Movie
-                </Link>
-              </li>
+              {loggedIn && (
+                <li>
+                  <Link to={'/create'} className='layout-links'>
+                    Create Movie
+                  </Link>
+                </li>
+              )}
               <li className='Welcome'>PopcornDB 👽</li>
             </ul>
           </nav>
         </div>
       </Fade>
-      <Outlet />
+      <Outlet context={[loggedIn, setLoggedIn]} />
     </>
   );
 }

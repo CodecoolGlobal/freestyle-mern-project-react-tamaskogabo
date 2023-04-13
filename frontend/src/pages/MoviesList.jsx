@@ -1,7 +1,8 @@
-import React, { useEffect, useState, } from 'react';
+import React, { useEffect, useState } from 'react';
 import MoviesTable from '../Components/MoviesTable/MoviesTable';
 import Loading from '../Components/Loading/Loading';
 import './MoviesList.css';
+import Login from '../Components/Login/Login';
 import Fade from 'react-reveal/Fade';
 
 function findYoungestAndOldest(movies) {
@@ -14,18 +15,19 @@ function findYoungestAndOldest(movies) {
       }
       return acc;
     },
-    { oldest: movies[0].year, youngest: movies[0].year }
+    { oldest: movies[0].year, youngest: movies[0].year },
   );
 }
 
 export default function MoviesList() {
   const [movies, setMovies] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [titleQuery, setTitleQuery] = useState("");
-  const [genresQuery, setGenresQuery] = useState("");
+  const [titleQuery, setTitleQuery] = useState('');
+  const [genresQuery, setGenresQuery] = useState('');
   const [yearQuery, setYearQuery] = useState({});
-  const [titleOrder, setTitleOrder] = useState("asc");
-  const [titleButton, setTitleButton] = useState("Title order: A ► Z");
+  const [titleOrder, setTitleOrder] = useState('asc');
+  const [titleButton, setTitleButton] = useState('Title order: A ► Z');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   let displayedMovies = [];
 
@@ -33,10 +35,10 @@ export default function MoviesList() {
     const youngestAndOldestMovie = findYoungestAndOldest(movies);
 
     displayedMovies = movies.filter((movie) =>
-      movie.title.toLowerCase().includes(titleQuery.toLowerCase())
+      movie.title.toLowerCase().includes(titleQuery.toLowerCase()),
     );
     displayedMovies = displayedMovies.filter((movie) =>
-      movie.genres.join(", ").toLowerCase().includes(genresQuery.toLowerCase())
+      movie.genres.join(', ').toLowerCase().includes(genresQuery.toLowerCase()),
     );
     if (
       yearQuery.after &&
@@ -44,7 +46,7 @@ export default function MoviesList() {
       yearQuery.after <= youngestAndOldestMovie.youngest
     ) {
       displayedMovies = displayedMovies.filter(
-        (movie) => Number(movie.year) >= yearQuery.after
+        (movie) => Number(movie.year) >= yearQuery.after,
       );
     }
     if (
@@ -53,7 +55,7 @@ export default function MoviesList() {
       yearQuery.before >= youngestAndOldestMovie.oldest
     ) {
       displayedMovies = displayedMovies.filter(
-        (movie) => Number(movie.year) <= yearQuery.before
+        (movie) => Number(movie.year) <= yearQuery.before,
       );
     }
   }
@@ -62,7 +64,7 @@ export default function MoviesList() {
     try {
       setLoading(true);
       await fetch(`http://localhost:8080/api/movies/${id}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
       const filteredMovies = movies.filter((movie) => movie._id !== id);
       setMovies(filteredMovies);
@@ -82,7 +84,7 @@ export default function MoviesList() {
           setLoading(false);
         }
       } catch (error) {
-        console.error("Something went wrong...");
+        console.error('Something went wrong...');
         console.log(error);
       }
     }
@@ -97,15 +99,25 @@ export default function MoviesList() {
     return <Loading />;
   }
 
+  if (isLoggedIn === false) {
+    return (
+      <>
+        <Fade top>
+          <Login onLogin={setIsLoggedIn} />;
+        </Fade>
+      </>
+    );
+  }
+
   function setOrder() {
-    titleOrder === "asc" ? setTitleOrder("desc") : setTitleOrder("asc");
-    titleButton === "Title order: A ► Z"
-      ? setTitleButton("Title order: Z ► A")
-      : setTitleButton("Title order: A ► Z");
+    titleOrder === 'asc' ? setTitleOrder('desc') : setTitleOrder('asc');
+    titleButton === 'Title order: A ► Z'
+      ? setTitleButton('Title order: Z ► A')
+      : setTitleButton('Title order: A ► Z');
   }
 
   displayedMovies.sort((a, b) => {
-    if (titleOrder === "asc") {
+    if (titleOrder === 'asc') {
       return a.title.localeCompare(b.title);
     } else {
       return b.title.localeCompare(a.title);
@@ -115,36 +127,36 @@ export default function MoviesList() {
   return (
     <>
       <Fade top>
-        <div className="search-inputs">
-        <button onClick={() => setOrder()}>{titleButton}</button>
+        <div className='search-inputs'>
+          <button onClick={() => setOrder()}>{titleButton}</button>
           <input
-            className="movie-filters"
-            type="search"
-            placeholder="Search by title"
+            className='movie-filters'
+            type='search'
+            placeholder='Search by title'
             value={titleQuery}
             onChange={(e) => setTitleQuery(e.target.value)}
           ></input>
           <input
-            className="movie-filters"
-            type="search"
-            placeholder="Search by genre"
+            className='movie-filters'
+            type='search'
+            placeholder='Search by genre'
             value={genresQuery}
             onChange={(e) => setGenresQuery(e.target.value)}
           ></input>
           <input
-            className="movie-filters"
-            type="number"
-            placeholder="From year..."
-            value={yearQuery.after ? yearQuery.after : ""}
+            className='movie-filters'
+            type='number'
+            placeholder='From year...'
+            value={yearQuery.after ? yearQuery.after : ''}
             onChange={(e) =>
               setYearQuery({ ...yearQuery, after: Number(e.target.value) })
             }
           ></input>
           <input
-            className="movie-filters"
-            type="number"
-            placeholder="Until year..."
-            value={yearQuery.before ? yearQuery.before : ""}
+            className='movie-filters'
+            type='number'
+            placeholder='Until year...'
+            value={yearQuery.before ? yearQuery.before : ''}
             onChange={(e) =>
               setYearQuery({ ...yearQuery, before: Number(e.target.value) })
             }
