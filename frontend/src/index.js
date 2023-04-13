@@ -9,6 +9,7 @@ import MoviesList from './pages/MoviesList';
 import UpdateMovie from './pages/UpdateMovie';
 import CreateMovie from './pages/CreateMovie';
 import MoreData from './pages/MoreData';
+import CommentSection from './pages/CommentSection';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
         path: '/more',
         element: <MoreData />,
       },
+      {
+        path: '/comment/:id',
+        element: <CommentSection />,
+      }
     ],
   },
 ]);

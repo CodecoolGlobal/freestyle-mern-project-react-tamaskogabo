@@ -12,7 +12,7 @@ const MovieSchema = new Schema(
     writers: [String],
     actors: [String],
     storyline: String,
-    directors: [String],
+    directors: [String]
   },
   { timestamps: true },
 );

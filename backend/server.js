@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const MovieModel = require('./models/movies.model');
 const UserModel = require('./models/user.model');
 const cors = require('cors');
+const CommentModel = require('./models/comments.model')
 
 require('dotenv').config();
 const { MONGO_URL, PORT } = process.env;
@@ -99,6 +100,20 @@ app.delete('/api/movies/:id', async (req, res) => {
   } catch (error) {
     res.send(error);
   }
+});
+
+app.post('/api/comment', async (req, res) => {
+  console.log('first');
+  const comment = req.body;
+  const newComment = await CommentModel.create(comment);
+  res.send(newComment);
+});
+
+app.get('/api/comment/:id', async (req, res) => {
+  const id = req.params.id;
+  const comments = await CommentModel.find({movie: id});
+  res.json(comments);
+  console.log(comments);
 });
 
 const main = async () => {
