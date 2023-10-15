@@ -114,6 +114,7 @@ app.get('/api/comment/:id', async (req, res) => {
 
 const main = async () => {
   await mongoose.connect(MONGO_URL);
+  
 
   app.listen(PORT, () => {
     console.log(`App is listening on ${PORT}`);
