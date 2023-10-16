@@ -16,6 +16,8 @@ app.use(
   }),
 );
 
+app.use(express.static('public'));
+
 app.use(express.json());
 
 app.post('/login', async (req, res) => {
@@ -112,10 +114,11 @@ app.get('/api/comment/:id', async (req, res) => {
 
 const main = async () => {
   await mongoose.connect(MONGO_URL);
+  
 
   app.listen(PORT, () => {
     console.log(`App is listening on ${PORT}`);
-    console.log(`http://127.0.0.1:${PORT}`);
+    console.log(`http://localhost:${PORT}`);
   });
 };
 
