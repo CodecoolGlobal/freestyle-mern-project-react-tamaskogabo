@@ -118,7 +118,7 @@ const main = async () => {
 
   app.listen(PORT, () => {
     console.log(`App is listening on ${PORT}`);
-    console.log(`http://127.0.0.1:${PORT}`);
+    console.log(`http://localhost:${PORT}`);
   });
 };
 

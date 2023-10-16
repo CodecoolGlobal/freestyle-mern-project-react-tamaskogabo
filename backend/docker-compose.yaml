@@ -21,5 +21,16 @@ services:
     depends_on: 
       - mongo_db
 
+  init_data:
+    build:
+      context: .
+    depends_on:
+      - mongo_db
+    command: ["node", "populate.js"]
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_URL: mongodb://mongo_db:27017/sample-db
+
 volumes:
   mongo_data: {}
