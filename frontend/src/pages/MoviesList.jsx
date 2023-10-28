@@ -4,6 +4,7 @@ import Loading from '../Components/Loading/Loading';
 import './MoviesList.css';
 import Login from '../Components/Login/Login';
 import Fade from 'react-reveal/Fade';
+import { useOutletContext } from 'react-router-dom';
 
 function findYoungestAndOldest(movies) {
   return movies.reduce(
@@ -27,7 +28,7 @@ export default function MoviesList() {
   const [yearQuery, setYearQuery] = useState({});
   const [titleOrder, setTitleOrder] = useState('asc');
   const [titleButton, setTitleButton] = useState('Title order: A ► Z');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useOutletContext();
 
   let displayedMovies = [];
 
