@@ -102,6 +102,7 @@ This section should list any major frameworks/libraries used to bootstrap the pr
 
 ### Prerequisites
   * download docker desktop from <a href="https://www.docker.com/products/docker-desktop">https://www.docker.com/products/docker-desktop/</a>
+  * set up git <a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a>
 
 ### Installation
 
@@ -109,7 +110,7 @@ This section should list any major frameworks/libraries used to bootstrap the pr
 * start docker desktop app
 * navigate into the ```/backend``` folder inside the cloned repository
 * give the ```docker compose up``` command in the ```/backend``` folder
-* the application should run on ```http://localhost:8080```
+* the application should run on <a href="http://localhost:8080">http://localhost:8080</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
