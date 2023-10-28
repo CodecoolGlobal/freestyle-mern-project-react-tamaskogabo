@@ -29,7 +29,7 @@ export default function UpdateMovie() {
       navigate('/');
     }
     catch (error) {
-      console.erro(error);
+      console.error(error);
     }
   };
   console.log(state);

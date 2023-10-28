@@ -39,7 +39,7 @@ export default function CreateMovie() {
     }
   }
 
-  if (loggedIn === false) {
+  if (!loggedIn) {
     return <Login />;
   }
 
